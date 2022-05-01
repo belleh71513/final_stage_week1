@@ -7,10 +7,11 @@ load_dotenv()
 
 
 dbconfig = {
-"host":os.getenv("DB_HOST"),
-"user":os.getenv("DB_USER"),
-"password":os.getenv("DB_PASSWORD"),
-"database":os.getenv("DB_DATABASE")
+"host":os.getenv("RDS_HOST"),
+"port":os.getenv("RDS_PORT"),
+"user":os.getenv("RDS_USER"),
+"password":os.getenv("RDS_PASSWORD"),
+"database":os.getenv("RDS_DATABASE")
 }
 
 pool = mysql.connector.pooling.MySQLConnectionPool(
@@ -47,7 +48,6 @@ def get_message():
           """
     cursor.execute(sql)
     result = cursor.fetchall()
-    print(result)
     return result
   except mysql.connector.Error as e:
     con.rollback()

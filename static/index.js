@@ -65,8 +65,6 @@ function render(result){
 
 async function init(){
   const data = await getData()
-  console.log(data)
   render(data)
 }
-
 init()

@@ -47,7 +47,6 @@ def upload_file():
 def get_file():
   try:
     files = get_message()
-    print(files)
   except:
     res = {
       "error" : True,
