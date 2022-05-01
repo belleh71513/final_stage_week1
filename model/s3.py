@@ -13,7 +13,9 @@ def upload_file_to_s3(file_name, bucket, object_name=None):
   if object_name is None:
     object_name = os.path.basename(file_name)
   try:
-    s3_client.upload_fileobj(file_name, bucket, object_name)
+    s3_client.upload_fileobj(file_name, bucket, object_name, ExtraArgs = {
+      "ACL" : "pubilc-read"
+    })
     return True
   except ClientError as e:
 

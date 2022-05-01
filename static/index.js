@@ -33,8 +33,6 @@ async function upload(){
 
 btn.addEventListener("click", upload)
 
-
-
 function render(result){
   const {message, image} = result
 
