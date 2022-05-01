@@ -9,13 +9,10 @@ AWS_STORAGE_BUCKET_NAME = "wehelp-third-phase-week1"
 
 s3_client = boto3.client("s3", aws_access_key_id= os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key= os.getenv("AWS_SECRET_KEY"))
 
-def upload_file_to_s3(file_name, bucket, object_name=None):
-  if object_name is None:
-    object_name = os.path.basename(file_name)
+def upload_file_to_s3(file, bucket, file_name):
+
   try:
-    s3_client.upload_fileobj(file_name, bucket, object_name, ExtraArgs = {
-      "ACL" : "pubilc-read"
-    })
+    s3_client.upload_fileobj(file, bucket,f"img/{file_name}", ExtraArgs={'ContentType': "image/jpeg"})
     return True
   except ClientError as e:
 

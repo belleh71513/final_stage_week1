@@ -30,7 +30,7 @@ def upload_file():
     print("upload file to s3 error")
     return jsonify(res), 500
 
-  image_url = f"https://dk9dkz6ihqn2o.cloudfront.net/{image.filename}"
+  image_url = f"https://dk9dkz6ihqn2o.cloudfront.net/img/{image.filename}"
   try:
     insert_message(message, image_url)
   except:

@@ -4,18 +4,17 @@ const src = "/api/files";
 
 async function getData(){
   const res = await fetch(src)
-  const data = res.json()
+  const data = await res.json()
   return data
 }
 
 async function upload(){
-  const message = document.querySelector("#message")
+  const message = document.querySelector("#message").value
   const imageFile = document.querySelector("#image").files[0]
 
   const uploadBody = new FormData();
   uploadBody.append("message", message)
   uploadBody.append("image", imageFile)
-
   try {
     let uploadData = {
       method: "POST",
@@ -24,7 +23,7 @@ async function upload(){
     const res = await fetch(src, uploadData)
     const result = await res.json()
     console.log(result)
-    render(result);
+    window.location.href = "/"
   }
   catch (error) {
     console.error(error)
@@ -34,27 +33,40 @@ async function upload(){
 btn.addEventListener("click", upload)
 
 function render(result){
-  const {message, image} = result
+  messageBoard = result.data
 
-  let divElement = document.createElement("div")
-  let hrLine = document.createElement("hr")
-  let pElement = document.createElement("p")
-  pElement.innerText = message
 
-  let imgContainer = document.createElement("div")
-  imgContainer.classList.add("img-container")
-  let img = document.createElement("img")
-  img.src = image
+  for(let item of messageBoard){
 
-  let bottomHrLine = document.createElement("hr")
+    const {message, image} = item
 
-  imgContainer.appendChild(img)
-  divElement.append(hrLine, pElement, imgContainer)
-  mainElement.append(divElement, bottomHrLine)
+    let divElement = document.createElement("div")
+    divElement.classList.add("container")
+    let hrLine = document.createElement("hr")
+    let pElement = document.createElement("p")
+    pElement.innerText = message
+
+    let imgContainer = document.createElement("div")
+    imgContainer.classList.add("img-container")
+    let img = document.createElement("img")
+    img.src = image
+
+    let bottomHrLine = document.createElement("hr")
+
+    imgContainer.appendChild(img)
+    divElement.append(hrLine, pElement, imgContainer)
+    let divZero = document.querySelectorAll(".container")[0]
+    mainElement.append(divElement, bottomHrLine)
+    mainElement.insertBefore(divElement, divZero)
+  }
 }
+
+
 
 async function init(){
   const data = await getData()
+  console.log(data)
   render(data)
 }
 
+init()
