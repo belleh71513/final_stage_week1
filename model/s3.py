@@ -13,11 +13,14 @@ def upload_file_to_s3(file_name, bucket, object_name=None):
   if object_name is None:
     object_name = os.path.basename(file_name)
   try:
-    response = s3_client.upload_file(file_name, bucket, object_name)
+    s3_client.upload_fileobj(file_name, bucket, object_name)
+    return True
   except ClientError as e:
+
     print(e)
     return False
-  return True
+
+
 
 # upload_file_to_s3("../static/img/111.jpg", "wehelp-third-phase-week1")
 # response = s3_client.list_buckets()

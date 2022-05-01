@@ -10,6 +10,14 @@
       margin:5px;
     }
 
+    img {
+      width: 100%;
+    }
+
+    .img-container {
+      width: 150px;
+      height: 150px;
+    }
   </style>
 </head>
 
@@ -17,16 +25,28 @@
   <div>
     <h2>發表一則圖文訊息</h2>
     <br>
-    <label for="">文字內容</label><input type="text" name="" id="">
+    <label for="message">文字內容</label><input type="text" name="message" id="message">
     <br>
-    <label for="">圖片檔案</ㄠ><input type="file" name="" id="">
+    <label for="image">圖片檔案</label><input type="file" name="image" id="image">
     <br>
   </div>
+  <button id="btn" type="submit">送出</button>
 
   <main>
 
   </main>
-    <button type="submit">送出</button>
+
+
+  <!-- <main>
+    <div>
+      <hr>
+      <p>sadfsdjfh</p>
+      <div class="img-container"><img src="https://picsum.photos/500/400?random=1" alt=""></div>
+    </div>
+    <hr>
+  </main> -->
+
+  <script src="{{url_for('static', filename='index.js')}}"></script>
 
 </body>
 </html>

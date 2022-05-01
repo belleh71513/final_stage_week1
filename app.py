@@ -16,10 +16,10 @@ AWS_CLOUD_FRONT = "https://dk9dkz6ihqn2o.cloudfront.net"
 def index():
   return render_template("index.html")
 
-@app.route("/files", methods=["POST"])
+@app.route("/api/files", methods=["POST"])
 def upload_file():
   message = request.form.get("message")
-  image = request.files["file"]
+  image = request.files["image"]
   try:
     upload_file_to_s3(image, AWS_STORAGE_BUCKET_NAME, image.filename)
   except:
@@ -43,7 +43,7 @@ def upload_file():
 
   return jsonify({"ok" : True}), 200
 
-@app.route("/files", methods=["GET"])
+@app.route("/api/files", methods=["GET"])
 def get_file():
   try:
     files = get_message()
